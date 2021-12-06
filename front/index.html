@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>School coding</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="./script.js"></script>
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="full-page">
+        <div class="sub-page">
+            <div class="navigation-bar">
+                <div class="logo">
+                    <a href=''>School Management System</a>
+                </div>
+                <nav>
+                    <ul id='MenuItems'>
+                        <li><a href='#'>Home</a></li>
+                        <li><a href='#'>Photos</a></li>
+                        <li><a href='#'>Services</a></li>
+                        <li><a href='#'>Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                    <div class="form-box">
+                        <div class="form">
+                            <form id="login">
+                                <center>
+                                    <h1 class="main-heading">Login Form</h1>
+                                </center>
+
+                                <input id="username" type="text" placeholder="user name" />
+                                <input id="password" type="password" placeholder="password" />
+
+
+                                <button onclick="login()">LOGIN</button>
+                                <p class="message">Not Registered? <a href="#">Register</a></p>
+                            </form>
+                            <form class="register-form">
+                                <center>
+                                    <h1 class="main-heading">Register Form</h1>
+                                </center>
+                                <input id="idname" type="text" placeholder="id name" />
+                                <input id="fullname" type="text" placeholder="full name" />
+
+                                <input id="gender" type="text" placeholder="gender" />
+                                <input id="class1" type="text" placeholder="class1" />
+                                <input id="grade" type="text" placeholder="grade" />
+                                <input id="password" type="password" placeholder="password" />
+
+                                <button id="submit" href="Home.html">REGISTER</button>
+
+                                <p class="message">Already Registered?<a href="#">Login</a>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <p class='defination'>Login and Registration Form Using<br> School Management
+                        System<br>Admin<br>-----create Account</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        $('.message a').click(function () { $('form').animate({ height: "toggle", opacity: "toggle" }, "slow"); });
+    </script>
+    <script>
+        var form = document.getElementById("login")
+        $(document).ready(function () {
+
+            console.log("ready!");
+            $("#submit").click(function (e) {
+                e.preventDefault();
+                var idname = document.getElementById("idname").value
+                var fullname = document.getElementById("fullname").value
+                var gender = document.getElementById("gender").value
+                var class1 = document.getElementById("class1").value
+                var grade = document.getElementById("grade").value
+                var password = document.getElementById("password").value
+
+
+                console.log("Data Present")
+
+                fetch("http://localhost:3000/admin", {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        idname: idname,
+                        fullname: fullname,
+                        gender: gender,
+                        class1: class1,
+                        grade: grade,
+                        password: password
+                    }),
+
+                    headers: {
+                        "content-Type": "application/json; charset=UTF-8"
+                    }
+                }).then(function (response) {
+                    return response.json()
+                }).then(function (data) {
+                    console.log(data);
+                })
+
+            })
+            console.log("ready!");
+        });
+
+        const newPost = {
+            "username": document.getElementById("username").value,
+            "password": document.getElementById("password").value
+        }
+        fetch('http://localhost:3000/admin', writeServer('POST', newPost))
+            .then(response => response.json())
+            .then(json => {
+                fetch('http://localhost:3000/admin')
+                    .then(response => response.json())
+                    .then(json => {
+                        console.log("Data get", json)
+                        console.log("Type of Json", typeof (json))
+                        console.log(Object.values(json))
+                        if (!!Object.keys(json).length) {
+                            var output1 = " ";
+                            Object.keys(json).forEach(id => {
+
+                                console.log(json[id])
+                                output1 += `
+                </li><li class="list-group-item">${json[id].username}
+               </li><li class="list-group-item">${json[id].password}
+                </li>`
+
+
+                            })
+                            listGroup.innerHTML = output1;
+                        }
+                    });
+            })
+
+        // login
+
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            fetch('http://localhost:3000/admin')
+                .then(response => response.json())
+                .then(json => {
+                    var authenticate = false;
+                    Object.keys(json).forEach(id => {
+
+                        console.log(json[id])
+                        console.log(json[id].username)
+
+                        if (username == json[id].username && password == json[id].password) {
+                            authenticate = true;
+                        }
+                    })
+                    if (authenticate == true) {
+                        window.location.href = "Home.html"
+                    } else {
+
+                        alert("Login failed please type correct username and password")
+
+                    }
+                })
+
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

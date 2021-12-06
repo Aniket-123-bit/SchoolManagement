@@ -1,0 +1,58 @@
+{
+  "admin": [
+    {
+      "fullname": "Aniket",
+      "username": "Raikwar",
+      "id": 123,
+      "gender": "Male",
+      "class": 10,
+      "grade": "A",
+      "password": "Aniket@123"
+    },
+    {
+      "idname": "456",
+      "fullname": "Amit Kada",
+      "gender": "Male",
+      "class1": "B.E",
+      "grade": "A",
+      "password": "",
+      "id": 124
+    },
+    {
+      "idname": "500",
+      "fullname": "Adrash",
+      "gender": "Male",
+      "class1": "B.E",
+      "grade": "A",
+      "password": "",
+      "id": 125
+    },
+    {
+      "idname": "101",
+      "fullname": "Anii",
+      "gender": "Male",
+      "class1": "B.E",
+      "grade": "A",
+      "password": "",
+      "id": 126
+    },
+    {
+      "idname": "124",
+      "fullname": "Sneha Raikwar",
+      "gender": "Female",
+      "class1": "B.com",
+      "grade": "A+",
+      "password": "",
+      "id": 127
+    },
+    {
+      "idname": "1234",
+      "fullname": "Vinay Vis",
+      "gender": "Male",
+      "class1": "M.com",
+      "grade": "A",
+      "password": "",
+      "id": 128
+    }
+  ]
+}
